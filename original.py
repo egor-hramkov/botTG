@@ -32,6 +32,7 @@ def on_message(message):
     global is_started
     if message.text == 'Начать тест заново':
         gen_iter = 0
+        is_started = False
         bot.send_message(message.from_user.id, 'Начинаем тест заново')
         bot.send_message(message.from_user.id, "Выберите тест для прохождения: \n" + '\n'.join(tests))
     elif message.text == 'Python':
@@ -43,9 +44,12 @@ def on_message(message):
     elif message.text in questions_for_python[gen_iter]['all_answers']:
         if message.text == questions_for_python[gen_iter]['all_answers'][questions_for_python[gen_iter]['right_answer']]:
             right_answ += 1
+            bot.send_message(message.from_user.id, "Правильно, переходим к следующему вопросу...")
+        else:
+            bot.send_message(message.from_user.id, "Неправильно, переходим к следующему вопросу...")
         if gen_iter == len(questions_for_python) - 1:
             percent_right_answ = format((right_answ/len(questions_for_python) * 100), '.2f')
-            bot.send_message(message.from_user.id, f'Тест завершён!\n Вы ответили правильно на {right_answ} вопросов, это {percent_right_answ}% от всего теста.')
+            bot.send_message(message.from_user.id, f'Тест завершён!\n Вы ответили правильно на {right_answ} из {len(questions_for_python)} вопросов, это {percent_right_answ}% от всего теста.')
         else:
             gen_iter += 1
             bot.send_message(message.from_user.id,
