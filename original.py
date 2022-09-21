@@ -3,7 +3,7 @@ from telebot import types
 
 bot = telebot.TeleBot("5607613808:AAEgyqwvJv6SCaoGl6pupeOnWd_F1Yo--Aw")
 
-tests = ['Python', 'Java']
+tests = ['Технологии программирования(Python)', 'Java']
 
 questions_for_python = [
     {'text': 'Имеется кортеж вида T = (4, 2, 3). Какая из операций приведёт к тому, что имя T будет ссылаться на кортеж (1, 2, 3)?', 'all_answers': ['T[0] = 1', 'T = (1) + T[1:]', 'T = (1,) + T[1:]', 'T.startswith(1)'], 'right_answer': 2},
@@ -31,7 +31,7 @@ def start_chat(message):
         bot.send_message(message.from_user.id, "Вы уже проходите тест, если хотите начать заново выберите 'Начать тест заново'")
     else:
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        item1 = types.KeyboardButton("Python")
+        item1 = types.KeyboardButton("Технологии программирования(Python)")
         markup.add(item1)
         bot.send_message(message.chat.id, 'Выберите тест для прохождения:', reply_markup=markup)
 
@@ -54,10 +54,10 @@ def on_message(message):
         gen_iter = 0
         is_started = False
         markup1 = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        item11 = types.KeyboardButton("Python")
+        item11 = types.KeyboardButton("Технологии программирования(Python)")
         markup1.add(item11)
         bot.send_message(message.chat.id, 'Выберите тест для прохождения:', reply_markup=markup1)
-    elif message.text == 'Python':
+    elif message.text == 'Технологии программирования(Python)':
         if is_started:
             bot.send_message(message.from_user.id, "Вы уже проходите тест, если хотите начать заново введите 'Начать тест заново'")
         else:
